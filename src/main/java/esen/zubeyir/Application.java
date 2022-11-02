@@ -1,8 +1,11 @@
 package esen.zubeyir;
 
+import esen.zubeyir.io.FileOperations;
 import esen.zubeyir.model.Country;
 import esen.zubeyir.service.ApiService;
+import esen.zubeyir.utils.Constants;
 
+import java.util.HashMap;
 import java.util.Scanner;
 
 /**
@@ -36,6 +39,19 @@ public class Application {
             System.out.println("Confirmed cases: " + response.getConfirmed());
             System.out.println("Recovered: " + response.getRecovered());
             System.out.println("Deaths: " + response.getDeaths());
+
+            HashMap<String, Long> backupData = (HashMap<String, Long>) FileOperations.getInstance().readFile(Constants.BACKUP_FILE_NAME);
+
+            if (backupData != null ) {
+                long lastCases = backupData.get(response.getName()) != null ? response.getConfirmed() : 0;
+                System.out.println("New confirmed cases since last data available: " + (response.getConfirmed() - lastCases));
+                backupData.put(response.getName(), response.getConfirmed());
+                FileOperations.getInstance().writeFile(backupData, Constants.BACKUP_FILE_NAME);
+            } else {
+                HashMap<String, Long> newData = new HashMap<>();
+                newData.put(response.getName(), response.getConfirmed());
+                FileOperations.getInstance().writeFile(newData, Constants.BACKUP_FILE_NAME);
+            }
         } catch (Exception e) {
             System.err.println("Error on fetching cases! Wrong input or broken endpoint.");
         }

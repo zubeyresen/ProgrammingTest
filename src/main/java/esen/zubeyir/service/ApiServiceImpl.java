@@ -24,10 +24,11 @@ public class ApiServiceImpl implements ApiService {
     public Country getCases(String query) throws IOException {
         String response = api.get(Constants.VACCINES_URL, query);
         JSONObject jsonObject = new JSONObject(response).getJSONObject("All");
+        String name = jsonObject.getString("country");
         long confirmed = jsonObject.getLong("confirmed");
         long recovered = jsonObject.getLong("recovered");
         long deaths = jsonObject.getLong("deaths");
-        return new Country(confirmed, recovered, deaths);
+        return new Country(name, confirmed, recovered, deaths);
     }
 
     @Override

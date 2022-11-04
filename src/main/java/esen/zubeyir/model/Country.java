@@ -7,6 +7,8 @@ import java.io.Serializable;
  * @version 1.0
  * created on 30/10/2022 - 12:30
  */
+
+//This is our POJO record object.
 public class Country implements Serializable {
     private final String name;
     private final Long confirmed;

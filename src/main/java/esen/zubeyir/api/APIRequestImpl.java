@@ -13,7 +13,12 @@ import java.net.URL;
  * @version 1.0
  * created on 30/10/2022 - 12:40
  */
+
+//Implementation of APIRequest interface
 public class APIRequestImpl implements APIRequest {
+
+    //In this method, we build get request with query param.
+    //Returns json as string.
     @Override
     public String get(String url, String query) throws IOException {
         String urlStr = Constants.buildUrlWithQuery(url, query);

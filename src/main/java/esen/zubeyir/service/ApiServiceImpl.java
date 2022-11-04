@@ -12,17 +12,22 @@ import java.io.IOException;
  * @version 1.0
  * created on 30/10/2022 - 17:31
  */
+
+//Implementation of service interface
 public class ApiServiceImpl implements ApiService {
 
     APIRequest api;
 
+    //Constructor injection used for injecting APIRequest
     public ApiServiceImpl(APIRequest api) {
         this.api = api;
     }
 
+    //This method takes country name as query param.
+    //Calls cases url with param and returns Country object.
     @Override
     public Country getCases(String query) throws IOException {
-        String response = api.get(Constants.VACCINES_URL, query);
+        String response = api.get(Constants.CASES_URL, query);
         JSONObject jsonObject = new JSONObject(response).getJSONObject("All");
         String name = jsonObject.getString("country");
         long confirmed = jsonObject.getLong("confirmed");
@@ -31,6 +36,8 @@ public class ApiServiceImpl implements ApiService {
         return new Country(name, confirmed, recovered, deaths);
     }
 
+    //This method takes country name as query param.
+    //Calls vaccines url with query param and calculates rate of vaccines. Returns result as Double.
     @Override
     public Double getVaccinatedRate(String query) throws IOException {
         String response = api.get(Constants.VACCINES_URL, query);

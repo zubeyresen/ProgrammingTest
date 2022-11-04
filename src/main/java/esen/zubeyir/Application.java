@@ -29,6 +29,16 @@ public class Application {
         return instance;
     }
 
+    /*
+    On run method, applications asks for a country name.
+    Country name is case sensitive, so user should enter correct form. (Only first letter must be uppercase)
+    Calls getCases from service, writes results to console and stores for future usages.
+    Then calls getVaccines from service and writes to console.
+
+    If user fetching cases for the first time, application does not shows 'New cases since last data available'.
+
+    IMPORTANT NOTE: vaccines endpoint is broken. So application writes 'broken endpoint' error.
+     */
     public void run() {
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter country: ");

@@ -8,7 +8,7 @@ package esen.zubeyir.utils;
 public class Constants {
 
     public static final String CASES_URL    = "https://covid-api.mmediagroup.fr/v1/cases";
-    public static final String VACCINES_URL = "https://covid-api.mmediagroup.fr/v1/cases";
+    public static final String VACCINES_URL = "https://covid-api.mmediagroup.fr/v1/vaccines";
     public static final String BACKUP_FILE_NAME = "backup.txt";
 
     public static String buildUrlWithQuery(String url, String query) {
